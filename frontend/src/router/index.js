@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,16 +6,74 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
+      path: '/monster',
+      name: 'monster',
+    },
+    {
+      path: '/inventory',
+      name: 'inventory',
+      component: () => import('../views/inventory/InventoryView.vue'),
+      children: [
+        {
+          path: 'accessory',
+          component: () => import('../views/inventory/AccessoryView.vue'),
+        },
+        {
+          path: 'cap',
+          name: 'cap',
+        },
+        {
+          path: 'cape',
+          name: 'cape',
+        },
+        {
+          path: 'coat',
+          name: 'coat',
+        },
+        {
+          path: 'face',
+          name: 'face',
+        },
+        {
+          path: 'glove',
+          name: 'glove',
+        },
+        {
+          path: 'longcoat',
+          name: 'longcoat',
+        },
+        {
+          path: 'pants',
+          name: 'pants',
+        },
+        {
+          path: 'ring',
+          name: 'ring',
+        },
+        {
+          path: 'shield',
+          name: 'shield',
+        },
+        {
+          path: 'shoes',
+          name: 'shoes',
+        },
+        {
+          path: 'weapon',
+          name: 'weapon',
+        },
+        {
+          path: 'etc',
+          name: 'etc',
+        },
+        {
+          path: 'use',
+          name: 'use',
+        },
+      ]
+    },
   ]
 })
 
