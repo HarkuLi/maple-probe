@@ -1,13 +1,12 @@
 package harkuli.mapleprobe.controllers;
 
+import harkuli.mapleprobe.responses.DroppersResponse;
 import harkuli.mapleprobe.responses.ItemsResponse;
 import harkuli.mapleprobe.responses.ItemsResponse.Item;
+import harkuli.mapleprobe.services.DropDataService;
 import harkuli.mapleprobe.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,10 +16,12 @@ import java.util.List;
 @RequestMapping("/items")
 public class ItemController {
     private final ItemService itemService;
+    private final DropDataService dropDataService;
 
     @Autowired
-    public ItemController(ItemService itemService) {
+    public ItemController(ItemService itemService, DropDataService dropDataService) {
         this.itemService = itemService;
+        this.dropDataService = dropDataService;
     }
 
     @GetMapping("/accessories")
@@ -175,5 +176,10 @@ public class ItemController {
             .toList();
 
         return new ItemsResponse(items);
+    }
+
+    @GetMapping("/{id}/droppers")
+    public DroppersResponse getDroppers(@PathVariable int id) {
+        return new DroppersResponse(dropDataService.getDroppers(id));
     }
 }
