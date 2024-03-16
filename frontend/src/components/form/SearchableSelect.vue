@@ -17,7 +17,7 @@ const emit = defineEmits(['select']) // return the selected option object or nul
 const fuse = new Fuse(props.options, { keys: props.searchKeys })
 
 const userInput = ref('')
-const target = ref(null)
+const target = ref(null) // option
 const matchedOptions = ref(props.options.slice(0, props.maxSuggestionNum))
 const activeIdx = ref(0)
 
@@ -26,7 +26,11 @@ const dropdownMenuRef = ref(null)
 
 selectById(props.selectedId)
 
-watch(() => props.selectedId, selectById)
+watch(() => props.selectedId, (newId) => {
+  if (target.value !== null && newId != target.value[props.idKey]) {
+    selectById(newId)
+  }
+})
 
 watch(userInput, (newValue) => {
   matchedOptions.value = newValue
@@ -67,11 +71,11 @@ function showDropdown() {
   }
 
   activeIdx.value = 0
-  Dropdown.getInstance(inputRef.value).show()
+  Dropdown.getOrCreateInstance(inputRef.value).show()
 }
 
 function hideDropdown() {
-  Dropdown.getInstance(inputRef.value).hide()
+  Dropdown.getOrCreateInstance(inputRef.value).hide()
 }
 
 function handleKeydown(keydownEvent) {
