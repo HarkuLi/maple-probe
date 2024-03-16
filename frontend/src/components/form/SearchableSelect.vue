@@ -33,6 +33,8 @@ watch(() => props.selectedId, (newId) => {
 })
 
 watch(userInput, (newValue) => {
+  activeIdx.value = 0
+
   matchedOptions.value = newValue
     ? fuse.search(newValue, { limit: props.maxSuggestionNum }).map((e) => e.item)
     : props.options.slice(0, props.maxSuggestionNum)

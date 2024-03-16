@@ -1,9 +1,15 @@
 <script setup>
+import { Maprobe } from '@/clients/maprobe';
 import ItemLayout from '@/components/ItemLayout.vue';
+import { ref } from 'vue';
 
-const items = []
+const items = ref(null);
+
+(async function fetchItems() {
+  items.value = await (new Maprobe()).getCoats()
+})()
 </script>
 
 <template>
-  <ItemLayout :items="items"></ItemLayout>
+  <ItemLayout v-if="items !== null" :items="items"></ItemLayout>
 </template>
