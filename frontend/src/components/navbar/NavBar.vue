@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import InventoryDropdown from './InventoryDropdown.vue'
+import ItemDropdown from './ItemDropdown.vue'
 </script>
 
 <template>
@@ -12,12 +12,12 @@ import InventoryDropdown from './InventoryDropdown.vue'
       </button>
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
-          <InventoryDropdown />
+          <ItemDropdown />
           <li class="nav-item">
-            <RouterLink to="/monster" class="nav-link" active-class="active">Monster</RouterLink>
+            <RouterLink to="/monsters" class="nav-link" active-class="active">Monsters</RouterLink>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-</template>
+</template>./ItemDropdown.vue

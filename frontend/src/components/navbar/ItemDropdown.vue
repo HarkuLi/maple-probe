@@ -3,31 +3,30 @@ import { RouterLink, useRouter } from 'vue-router'
 
 const router = useRouter()
 
-const paths = router.options.routes
-  .find((route) => route.name === 'inventory')
+const routes = router.options.routes
+  .find((route) => route.name === 'items')
   .children
-  .map((route) => route.path)
 </script>
 
 <template>
   <li class="nav-item dropdown">
     <RouterLink
-      to="/inventory"
+      to="/items"
       class="nav-link dropdown-toggle"
       active-class="active"
       role="button"
       data-bs-toggle="dropdown"
     >
-      Inventory
+      Items
     </RouterLink>
     <ul class="dropdown-menu">
-      <li v-for="path in paths" :key="path">
+      <li v-for="route in routes" :key="route.path">
         <RouterLink
-          :to="`/inventory/${path}`"
+          :to="`/items/${route.path.substring(0, route.path.indexOf('/'))}`"
           class="dropdown-item"
           active-class="active"
         >
-          {{ path.charAt(0).toUpperCase() + path.slice(1) }}
+          {{ route.name.charAt(0).toUpperCase() + route.name.slice(1) }}
         </RouterLink>
       </li>
     </ul>
