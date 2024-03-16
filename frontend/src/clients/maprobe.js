@@ -88,4 +88,10 @@ export class Maprobe {
     const body = await response.json();
     return body ? body.data : []
   }
+
+  async getDroppers(itemId) {
+    const response = await fetch(`${this.host}/items/${itemId}/droppers`);
+    const body = await response.json();
+    return body ? body.data : []
+  }
 }

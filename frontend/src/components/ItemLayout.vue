@@ -1,4 +1,5 @@
 <script setup>
+import { Maprobe } from '@/clients/maprobe';
 import SearchableSelect from '@/components/form/SearchableSelect.vue';
 import { Tooltip } from 'bootstrap';
 import { computed, onUpdated, ref } from 'vue';
@@ -10,6 +11,7 @@ defineProps({
 
 const route = useRoute()
 const router = useRouter()
+const maprobe = new Maprobe()
 
 const id = computed(() => route.params.id)
 const item = ref(null)
@@ -32,30 +34,7 @@ function handleSelect(selectedItem) {
 }
 
 async function fetchDroppers() {
-  console.log(`fetch dropper of item: ${item.value.id}`)
-
-  droppers.value = [
-    {id: 100100, name: 'Snail', chance: 100},
-    {id: 100101, name: 'Blue Snail', chance: 100},
-    {id: 100120, name: 'Tino', chance: 100},
-    {id: 100121, name: 'Tiv', chance: 100},
-    {id: 100122, name: 'Timu', chance: 100},
-    {id: 100123, name: 'Tiru', chance: 100},
-    {id: 100124, name: 'Tiguru', chance: 100},
-    {id: 1110100, name: 'Green Mushroom', chance: 100},
-    {id: 1110101, name: 'Dark Stump', chance: 100},
-    {id: 1120100, name: 'Octopus', chance: 100},
-    {id: 1130100, name: 'Axe Stump', chance: 100},
-    {id: 1140100, name: 'Ghost Stump', chance: 100},
-    {id: 120100, name: 'Shroom', chance: 100},
-    {id: 1210100, name: 'Pig', chance: 100},
-    {id: 1210101, name: 'Ribbon Pig', chance: 100},
-    {id: 1210102, name: 'Orange Mushroom', chance: 100},
-    {id: 2230131, name: 'Annoyed Zombie Mushroom', chance: 100},
-    {id: 1110130, name: 'Dejected Green Mushroom', chance: 100},
-    {id: 1140130, name: 'Smirking Ghost Stump', chance: 100},
-    {id: 1210103, name: 'Bubbling', chance: 100},
-  ];
+  droppers.value = await maprobe.getDroppers(item.value.id)
 }
 
 onUpdated(() => {
@@ -100,7 +79,7 @@ onUpdated(() => {
         class="m-1"
         data-bs-toggle="tooltip"
         data-bs-html="true"
-        :title="`name: ${dropper.name}<br/>chance: ${dropper.chance}`"
+        :title="`Name: ${dropper.name}<br/>Chance: ${dropper.chance}`"
       >
         <a href="#">
           <img class="img-thumbnail" src="@/assets/monster/default.gif" :alt="dropper.name">
