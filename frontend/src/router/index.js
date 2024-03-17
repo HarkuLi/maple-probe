@@ -6,6 +6,9 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      redirect: () => {
+        return { name: 'monsters' }
+      },
     },
     {
       path: '/monsters/:id?',
