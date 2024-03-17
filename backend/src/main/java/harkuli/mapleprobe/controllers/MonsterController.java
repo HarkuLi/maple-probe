@@ -1,14 +1,12 @@
 package harkuli.mapleprobe.controllers;
 
+import harkuli.mapleprobe.responses.DropsResponse;
 import harkuli.mapleprobe.responses.MonstersResponse;
 import harkuli.mapleprobe.responses.MonstersResponse.Monster;
 import harkuli.mapleprobe.services.DropDataService;
 import harkuli.mapleprobe.services.MonsterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +32,10 @@ public class MonsterController {
             .toList();
 
         return new MonstersResponse(monsters);
+    }
+
+    @GetMapping("/{id}/drops")
+    public DropsResponse getDrops(@PathVariable int id) {
+        return new DropsResponse(dropDataService.getDrops(id));
     }
 }

@@ -277,4 +277,64 @@ public class Items {
             new TypeReference<Map<Integer, String>>() {}
         );
     }
+
+    public String getName(int id) {
+        try {
+            if (getAccessories().containsKey(id)) {
+                return getAccessories().get(id);
+            }
+
+            if (getCapes().containsKey(id)) {
+                return getCapes().get(id);
+            }
+
+            if (getCaps().containsKey(id)) {
+                return getCaps().get(id);
+            }
+
+            if (getCoats().containsKey(id)) {
+                return getCoats().get(id);
+            }
+
+            if (getEtc().containsKey(id)) {
+                return getEtc().get(id);
+            }
+
+            if (getGloves().containsKey(id)) {
+                return getGloves().get(id);
+            }
+
+            if (getLongCoats().containsKey(id)) {
+                return getLongCoats().get(id);
+            }
+
+            if (getPants().containsKey(id)) {
+                return getPants().get(id);
+            }
+
+            if (getRings().containsKey(id)) {
+                return getRings().get(id);
+            }
+
+            if (getShields().containsKey(id)) {
+                return getShields().get(id);
+            }
+
+            if (getShoes().containsKey(id)) {
+                return getShoes().get(id);
+            }
+
+            if (getUses().containsKey(id)) {
+                return getUses().get(id);
+            }
+
+            if (getWeapons().containsKey(id)) {
+                return getWeapons().get(id);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return "";
+    }
 }
