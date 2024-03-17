@@ -1,7 +1,7 @@
 <script setup>
 import { Maprobe } from '@/clients/maprobe';
 import SearchableSelect from '@/components/form/SearchableSelect.vue';
-import { AssetUrl } from '@/utils/asset-url';
+import { PublicUrl } from '@/utils/public-url';
 import { Tooltip } from 'bootstrap';
 import { computed, onUpdated, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -13,7 +13,7 @@ defineProps({
 const route = useRoute()
 const router = useRouter()
 const maprobe = new Maprobe()
-const assetUrl = new AssetUrl()
+const publicUrl = new PublicUrl()
 
 const id = computed(() => route.params.id)
 const item = ref(null)
@@ -59,6 +59,14 @@ onUpdated(() => {
   </div>
   <template v-if="item">
     <div class="mt-4">
+      <img :src="publicUrl.item(item.id)"
+        :alt="item.name"
+        class="img-thumbnail mx-auto d-block"
+        width="120"
+        height="120"
+      >
+    </div>
+    <div class="mt-4">
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link active" href="#">Dropped by</a>
@@ -84,10 +92,10 @@ onUpdated(() => {
         :title="`Name: ${dropper.name}<br/>Chance: ${dropper.chance}`"
       >
         <a>
-          <img :src="assetUrl.monster(dropper.id)"
+          <img :src="publicUrl.monster(dropper.id)"
             :alt="dropper.name"
             class="img-thumbnail"
-            @error="e => e.target.src = assetUrl.monsterDefault()"
+            @error="e => e.target.src = publicUrl.monsterDefault()"
           >
         </a>
       </div>
