@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: Maprobe
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USERNAME:cosmic_server}
+    password: ${DB_PASSWORD:snailshell}
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3307}/${DB_DATABASE:cosmic}
+
+server:
+  port: ${LISTEN_PORT:8080}

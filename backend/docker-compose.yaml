@@ -1,0 +1,13 @@
+services:
+  backend:
+    build: .
+    init: true
+    environment:
+      LISTEN_PORT: 8080
+      DB_HOST: localhost
+      DB_PORT: 3307
+      DB_DATABASE: cosmic
+      DB_USERNAME: cosmic_server
+      DB_PASSWORD: snailshell
+    ports:
+    - 8090:8080
