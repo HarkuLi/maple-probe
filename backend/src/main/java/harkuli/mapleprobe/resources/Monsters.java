@@ -16,6 +16,14 @@ public class Monsters {
     @Value("classpath:data/monsters.json")
     Resource monstersResource;
 
+    public Map<Integer, String> getAll() {
+        if (names == null) {
+            load();
+        }
+
+        return names;
+    }
+
     public String getName(int id) {
         if (names == null) {
             load();
