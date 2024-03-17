@@ -39,7 +39,7 @@ public class Monsters {
     private void load() {
         try {
             names = (new ObjectMapper()).readValue(
-                monstersResource.getFile(),
+                monstersResource.getInputStream(),
                 new TypeReference<Map<Integer, String>>() {}
             );
         } catch (IOException e) {

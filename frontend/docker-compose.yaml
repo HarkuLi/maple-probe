@@ -1,6 +1,0 @@
-services:
-  frontend:
-    build: .
-    init: true
-    ports:
-    - 8080:80

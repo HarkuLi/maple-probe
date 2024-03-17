@@ -32,5 +32,6 @@ dependencies {
 }
 
 bootJar {
+	archiveBaseName = 'maprobe'
 	archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
 }
