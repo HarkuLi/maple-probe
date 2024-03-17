@@ -116,6 +116,7 @@ function handleKeydown(keydownEvent) {
     @keydown="handleKeydown"
     v-model="userInput"
     ref="inputRef"
+    :disabled="options.length <= 1"
   >
   <ul class="container dropdown-menu" ref="dropdownMenuRef">
     <li v-for="[idx, option] of matchedOptions.entries()" :key="option[props.idKey]">

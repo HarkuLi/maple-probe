@@ -96,13 +96,16 @@ onUpdated(() => {
         data-bs-html="true"
         :title="`ID: ${drop.id}<br/>Name: ${drop.name}<br/>Chance: ${drop.chance}`"
       >
-        <a>
+        <RouterLink
+          :to="{ name: 'single-item', params: { id: drop.id }, query: { name: drop.name } }"
+          target="_blank"
+        >
           <img :src="publicUrl.item(drop.id)"
             :alt="drop.name"
             class="img-thumbnail"
             @error="e => e.target.src = publicUrl.itemDefault()"
           >
-        </a>
+        </RouterLink>
       </div>
     </div>
     <div v-else class="mt-5 spinner-border text-muted d-block mx-auto"></div>

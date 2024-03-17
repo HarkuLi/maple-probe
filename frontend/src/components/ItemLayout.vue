@@ -7,7 +7,7 @@ import { Tooltip } from 'bootstrap';
 import { computed, onUpdated, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-defineProps({
+const props = defineProps({
   items: { type: Array /* [{'id': Number, 'name': String}, ...] */, required: true },
 })
 
@@ -18,7 +18,7 @@ const publicUrl = new PublicUrl()
 const bbbHidenStreetUrl = new BbbHidenStreetUrl()
 
 const id = computed(() => route.params.id)
-const item = ref(null)
+const item = ref(props.items.length === 1 ? props.items[0] : null)
 
 const droppedByRef = ref(null)
 
@@ -96,13 +96,13 @@ onUpdated(() => {
         data-bs-html="true"
         :title="`Name: ${dropper.name}<br/>Chance: ${dropper.chance}`"
       >
-        <a>
+        <RouterLink :to="{ name: 'monsters', params: { id: dropper.id } }" target="_blank">
           <img :src="publicUrl.monster(dropper.id)"
             :alt="dropper.name"
             class="img-thumbnail"
             @error="e => e.target.src = publicUrl.monsterDefault()"
           >
-        </a>
+        </RouterLink>
       </div>
     </div>
     <div v-else class="mt-5 spinner-border text-muted d-block mx-auto"></div>

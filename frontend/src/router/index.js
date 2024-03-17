@@ -86,6 +86,11 @@ const router = createRouter({
           name: 'uses',
           component: () => import('@/views/item/UseView.vue'),
         },
+        {
+          path: ':id',
+          name: 'single-item',
+          component: () => import('@/views/item/ItemView.vue'),
+        },
       ]
     },
   ]
