@@ -1,6 +1,7 @@
 <script setup>
 import { Maprobe } from '@/clients/maprobe';
 import SearchableSelect from '@/components/form/SearchableSelect.vue';
+import { AssetUrl } from '@/utils/asset-url';
 import { Tooltip } from 'bootstrap';
 import { computed, onUpdated, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -12,6 +13,7 @@ defineProps({
 const route = useRoute()
 const router = useRouter()
 const maprobe = new Maprobe()
+const assetUrl = new AssetUrl()
 
 const id = computed(() => route.params.id)
 const item = ref(null)
@@ -76,13 +78,17 @@ onUpdated(() => {
     <div class="d-flex flex-wrap pt-4" ref="droppedByRef">
       <div v-for="dropper of droppers"
         :key="dropper.id"
-        class="m-1"
+        class="m-1 item-dropper align-self-end"
         data-bs-toggle="tooltip"
         data-bs-html="true"
         :title="`Name: ${dropper.name}<br/>Chance: ${dropper.chance}`"
       >
-        <a href="#">
-          <img class="img-thumbnail" src="@/assets/monster/default.gif" :alt="dropper.name">
+        <a>
+          <img :src="assetUrl.monster(dropper.id)"
+            :alt="dropper.name"
+            class="img-thumbnail"
+            @error="e => e.target.src = assetUrl.monsterDefault()"
+          >
         </a>
       </div>
     </div>
@@ -92,5 +98,9 @@ onUpdated(() => {
 <style>
 .tooltip-inner {
   text-align: left;
+}
+
+.item-dropper .img-thumbnail {
+  width: 6rem;
 }
 </style>
