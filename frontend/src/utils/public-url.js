@@ -1,14 +1,18 @@
 export class PublicUrl
 {
   monster(id) {
-    return `/monsters/${id}.png`
+    return `/images/monsters/${id}.png`
   }
 
   monsterDefault() {
-    return '/monsters/default.png'
+    return '/images/monsters/default.png'
   }
 
   item(id) {
-    return `/items/${id}.png`
+    return `/images/items/${id}.png`
+  }
+
+  itemDefault() {
+    return '/images/monsters/default.png'
   }
 }

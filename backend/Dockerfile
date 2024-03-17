@@ -22,4 +22,4 @@ FROM eclipse-temurin:${JDK_VERSION}
 
 COPY --from=build /app/build/libs/maprobe.jar .
 
-ENTRYPOINT ["java", "-jar", "./server.jar"]
+ENTRYPOINT ["java", "-jar", "./maprobe.jar"]

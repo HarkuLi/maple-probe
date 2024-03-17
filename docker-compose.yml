@@ -1,0 +1,20 @@
+services:
+  backend:
+    build: ./backend
+    init: true
+    environment:
+      LISTEN_PORT: 8080
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    extra_hosts:
+    - "host.docker.internal:host-gateway"
+    ports:
+    - ${BACKEND_PORT}:8080
+  frontend:
+    build: ./frontend
+    init: true
+    ports:
+    - ${FRONTEND_PORT}:80

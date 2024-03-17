@@ -16,6 +16,14 @@ public class Monsters {
     @Value("classpath:data/monsters.json")
     Resource monstersResource;
 
+    public Map<Integer, String> getAll() {
+        if (names == null) {
+            load();
+        }
+
+        return names;
+    }
+
     public String getName(int id) {
         if (names == null) {
             load();
@@ -31,7 +39,7 @@ public class Monsters {
     private void load() {
         try {
             names = (new ObjectMapper()).readValue(
-                monstersResource.getFile(),
+                monstersResource.getInputStream(),
                 new TypeReference<Map<Integer, String>>() {}
             );
         } catch (IOException e) {

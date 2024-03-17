@@ -78,7 +78,7 @@ public class Items {
 
     private void loadAccessories() throws IOException {
         accessories = (new ObjectMapper()).readValue(
-            accessoriesResource.getFile(),
+            accessoriesResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
     }
@@ -93,7 +93,7 @@ public class Items {
 
     private void loadCapes() throws IOException {
         capes = (new ObjectMapper()).readValue(
-            capesResource.getFile(),
+            capesResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
     }
@@ -108,7 +108,7 @@ public class Items {
 
     private void loadCaps() throws IOException {
         caps = (new ObjectMapper()).readValue(
-            capsResource.getFile(),
+            capsResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
     }
@@ -123,7 +123,7 @@ public class Items {
 
     private void loadCoats() throws IOException {
         coats = (new ObjectMapper()).readValue(
-            coatsResource.getFile(),
+            coatsResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
     }
@@ -138,7 +138,7 @@ public class Items {
 
     private void loadEtc() throws IOException {
         etc = (new ObjectMapper()).readValue(
-            etcResource.getFile(),
+            etcResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
     }
@@ -153,7 +153,7 @@ public class Items {
 
     private void loadFaces() throws IOException {
         faces = (new ObjectMapper()).readValue(
-            facesResource.getFile(),
+            facesResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
     }
@@ -168,7 +168,7 @@ public class Items {
 
     private void loadGloves() throws IOException {
         gloves = (new ObjectMapper()).readValue(
-            glovesResource.getFile(),
+            glovesResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
     }
@@ -183,7 +183,7 @@ public class Items {
 
     private void loadLongCoats() throws IOException {
         longCoats = (new ObjectMapper()).readValue(
-            longCoatsResource.getFile(),
+            longCoatsResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
     }
@@ -198,7 +198,7 @@ public class Items {
 
     private void loadPants() throws IOException {
         pants = (new ObjectMapper()).readValue(
-            pantsResource.getFile(),
+            pantsResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
     }
@@ -213,7 +213,7 @@ public class Items {
 
     private void loadRings() throws IOException {
         rings = (new ObjectMapper()).readValue(
-            ringsResource.getFile(),
+            ringsResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
     }
@@ -228,7 +228,7 @@ public class Items {
 
     private void loadShields() throws IOException {
         shields = (new ObjectMapper()).readValue(
-            shieldsResource.getFile(),
+            shieldsResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
     }
@@ -243,7 +243,7 @@ public class Items {
 
     private void loadShoes() throws IOException {
         shoes = (new ObjectMapper()).readValue(
-            shoesResource.getFile(),
+            shoesResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
     }
@@ -258,7 +258,7 @@ public class Items {
 
     private void loadUses() throws IOException {
         uses = (new ObjectMapper()).readValue(
-            usesResource.getFile(),
+            usesResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
     }
@@ -273,8 +273,68 @@ public class Items {
 
     private void loadWeapons() throws IOException {
         weapons = (new ObjectMapper()).readValue(
-            weaponsResource.getFile(),
+            weaponsResource.getInputStream(),
             new TypeReference<Map<Integer, String>>() {}
         );
+    }
+
+    public String getName(int id) {
+        try {
+            if (getAccessories().containsKey(id)) {
+                return getAccessories().get(id);
+            }
+
+            if (getCapes().containsKey(id)) {
+                return getCapes().get(id);
+            }
+
+            if (getCaps().containsKey(id)) {
+                return getCaps().get(id);
+            }
+
+            if (getCoats().containsKey(id)) {
+                return getCoats().get(id);
+            }
+
+            if (getEtc().containsKey(id)) {
+                return getEtc().get(id);
+            }
+
+            if (getGloves().containsKey(id)) {
+                return getGloves().get(id);
+            }
+
+            if (getLongCoats().containsKey(id)) {
+                return getLongCoats().get(id);
+            }
+
+            if (getPants().containsKey(id)) {
+                return getPants().get(id);
+            }
+
+            if (getRings().containsKey(id)) {
+                return getRings().get(id);
+            }
+
+            if (getShields().containsKey(id)) {
+                return getShields().get(id);
+            }
+
+            if (getShoes().containsKey(id)) {
+                return getShoes().get(id);
+            }
+
+            if (getUses().containsKey(id)) {
+                return getUses().get(id);
+            }
+
+            if (getWeapons().containsKey(id)) {
+                return getWeapons().get(id);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return "";
     }
 }

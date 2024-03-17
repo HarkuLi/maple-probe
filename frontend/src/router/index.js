@@ -6,10 +6,14 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      redirect: () => {
+        return { name: 'monsters' }
+      },
     },
     {
-      path: '/monsters',
+      path: '/monsters/:id?',
       name: 'monsters',
+      component: () => import('@/views/MonsterView.vue'),
     },
     {
       path: '/items',
@@ -84,6 +88,11 @@ const router = createRouter({
           path: 'uses/:id?',
           name: 'uses',
           component: () => import('@/views/item/UseView.vue'),
+        },
+        {
+          path: ':id',
+          name: 'single-item',
+          component: () => import('@/views/item/ItemView.vue'),
         },
       ]
     },

@@ -20,15 +20,17 @@ const routes = router.options.routes
       Items
     </RouterLink>
     <ul class="dropdown-menu">
-      <li v-for="route in routes" :key="route.path">
-        <RouterLink
-          :to="`/items/${route.path.substring(0, route.path.indexOf('/'))}`"
-          class="dropdown-item"
-          active-class="active"
-        >
-          {{ route.name.charAt(0).toUpperCase() + route.name.slice(1) }}
-        </RouterLink>
-      </li>
+      <template v-for="route in routes" :key="route.path">
+        <li v-if="route.name !== 'single-item'">
+          <RouterLink
+            :to="`/items/${route.path.substring(0, route.path.indexOf('/'))}`"
+            class="dropdown-item"
+            active-class="active"
+          >
+            {{ route.name.charAt(0).toUpperCase() + route.name.slice(1) }}
+          </RouterLink>
+        </li>
+      </template>
     </ul>
   </li>
 </template>

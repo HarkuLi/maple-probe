@@ -94,4 +94,16 @@ export class Maprobe {
     const body = await response.json();
     return body ? body.data : []
   }
+
+  async getMonsters() {
+    const response = await fetch(`${this.host}/monsters`);
+    const body = await response.json();
+    return body ? body.data : []
+  }
+
+  async getDrops(monsterId) {
+    const response = await fetch(`${this.host}/monsters/${monsterId}/drops`);
+    const body = await response.json();
+    return body ? body.data : []
+  }
 }
