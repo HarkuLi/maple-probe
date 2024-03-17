@@ -8,7 +8,7 @@ import { computed, onUpdated, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 defineProps({
-  items: { type: Array /* [{'id': Number, 'name': String}, ...] */, required: true },
+  monsters: { type: Array /* [{'id': Number, 'name': String}, ...] */, required: true },
 })
 
 const route = useRoute()
@@ -18,29 +18,29 @@ const publicUrl = new PublicUrl()
 const bbbHidenStreetUrl = new BbbHidenStreetUrl()
 
 const id = computed(() => route.params.id)
-const item = ref(null)
+const monster = ref(null)
 
-const droppedByRef = ref(null)
+const dropsRef = ref(null)
 
-const droppers = ref(null)
+const drops = ref(null)
 
-function handleSelect(selectedItem) {
-  item.value = null
-  droppers.value = null
+function handleSelect(selectedMonster) {
+  monster.value = null
+  drops.value = null
 
-  if (!selectedItem) {
+  if (!selectedMonster) {
     return
   }
 
-  router.push({name: router.currentRoute.value.name, params: {id: selectedItem.id}})
+  router.push({name: router.currentRoute.value.name, params: {id: selectedMonster.id}})
 
-  item.value = selectedItem
+  monster.value = selectedMonster
 
-  fetchDroppers()
+  fetchDrops()
 }
 
-async function fetchDroppers() {
-  droppers.value = await maprobe.getDroppers(item.value.id)
+async function fetchDrops() {
+  drops.value = await maprobe.getDrops(monster.value.id)
 }
 
 onUpdated(() => {
@@ -54,53 +54,53 @@ onUpdated(() => {
 <template>
   <div>
     <SearchableSelect
-      :options="items"
+      :options="monsters"
       :selectedId="id"
       :searchKeys="['id', 'name']"
       :optionFormatter="(option) => `${option.name} (${option.id})`"
       @select="handleSelect"
     />
   </div>
-  <template v-if="item">
+  <template v-if="monster">
     <div class="mt-4">
-      <img :src="publicUrl.item(item.id)"
-        :alt="item.name"
+      <img :src="publicUrl.monster(monster.id)"
+        :alt="monster.name"
         class="img-thumbnail mx-auto d-block"
         width="120"
         height="120"
+        @error="e => e.target.src = publicUrl.monsterDefault()"
       >
     </div>
     <div class="mt-4">
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Dropped by</a>
+          <a class="nav-link active" href="#">Drops</a>
         </li>
         <li class="nav-item">
           <a
             class="nav-link"
-            :href="bbbHidenStreetUrl.search(item.name)"
+            :href="bbbHidenStreetUrl.monster(monster.name)"
             target="_blank"
             rel="noreferrer noopenner"
-            @error="e => e.target.src = publicUrl.itemDefault()"
           >
             Details
           </a>
         </li>
       </ul>
     </div>
-    <div v-if="droppers" class="d-flex flex-wrap pt-4" ref="droppedByRef">
-      <div v-for="dropper of droppers"
-        :key="dropper.id"
-        class="m-1 item-dropper align-self-end"
+    <div v-if="drops" class="d-flex flex-wrap pt-4" ref="dropsRef">
+      <div v-for="drop of drops"
+        :key="drop.id"
+        class="m-1 dropped-item align-self-end"
         data-bs-toggle="tooltip"
         data-bs-html="true"
-        :title="`Name: ${dropper.name}<br/>Chance: ${dropper.chance}`"
+        :title="`ID: ${drop.id}<br/>Name: ${drop.name}<br/>Chance: ${drop.chance}`"
       >
         <a>
-          <img :src="publicUrl.monster(dropper.id)"
-            :alt="dropper.name"
+          <img :src="publicUrl.item(drop.id)"
+            :alt="drop.name"
             class="img-thumbnail"
-            @error="e => e.target.src = publicUrl.monsterDefault()"
+            @error="e => e.target.src = publicUrl.itemDefault()"
           >
         </a>
       </div>
@@ -114,7 +114,7 @@ onUpdated(() => {
   text-align: left;
 }
 
-.item-dropper .img-thumbnail {
+.dropped-item .img-thumbnail {
   width: 6rem;
 }
 </style>

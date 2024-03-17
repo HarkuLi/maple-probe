@@ -8,8 +8,9 @@ const router = createRouter({
       name: 'home',
     },
     {
-      path: '/monsters',
+      path: '/monsters/:id?',
       name: 'monsters',
+      component: () => import('@/views/MonsterView.vue'),
     },
     {
       path: '/items',

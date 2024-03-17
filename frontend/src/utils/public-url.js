@@ -11,4 +11,8 @@ export class PublicUrl
   item(id) {
     return `/items/${id}.png`
   }
+
+  itemDefault() {
+    return '/monsters/default.png'
+  }
 }
