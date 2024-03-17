@@ -20,11 +20,13 @@ const item = ref(null)
 
 const droppedByRef = ref(null)
 
-const droppers = ref([])
+const droppers = ref(null)
 
 function handleSelect(selectedItem) {
+  item.value = null
+  droppers.value = null
+
   if (!selectedItem) {
-    droppers.value = []
     return
   }
 
@@ -83,7 +85,7 @@ onUpdated(() => {
         </li>
       </ul>
     </div>
-    <div class="d-flex flex-wrap pt-4" ref="droppedByRef">
+    <div v-if="droppers" class="d-flex flex-wrap pt-4" ref="droppedByRef">
       <div v-for="dropper of droppers"
         :key="dropper.id"
         class="m-1 item-dropper align-self-end"
@@ -100,6 +102,7 @@ onUpdated(() => {
         </a>
       </div>
     </div>
+    <div v-else class="mt-5 spinner-border text-muted d-block mx-auto"></div>
   </template>
 </template>
 

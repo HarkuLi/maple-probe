@@ -12,4 +12,5 @@ const items = ref(null);
 
 <template>
   <ItemLayout v-if="items !== null" :items="items"></ItemLayout>
+  <div v-else class="spinner-border text-muted d-block mx-auto"></div>
 </template>
