@@ -6,6 +6,7 @@ import { PublicUrl } from '@/utils/public-url';
 import { Tooltip } from 'bootstrap';
 import { computed, onUpdated, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import FallbackableImage from './common/FallbackableImage.vue';
 
 defineProps({
   monsters: { type: Array /* [{'id': Number, 'name': String}, ...] */, required: true },
@@ -63,13 +64,14 @@ onUpdated(() => {
   </div>
   <template v-if="monster">
     <div class="mt-4">
-      <img :src="publicUrl.monster(monster.id)"
+      <FallbackableImage
+        :src="publicUrl.monster(monster.id)"
+        :fallback-src="publicUrl.monsterDefault()"
         :alt="monster.name"
         class="img-thumbnail mx-auto d-block"
         width="120"
         height="120"
-        @error="e => e.target.src = publicUrl.monsterDefault()"
-      >
+      />
     </div>
     <div class="mt-4">
       <ul class="nav nav-tabs">
@@ -100,11 +102,12 @@ onUpdated(() => {
           :to="{ name: 'single-item', params: { id: drop.id }, query: { name: drop.name } }"
           target="_blank"
         >
-          <img :src="publicUrl.item(drop.id)"
+          <FallbackableImage
+            :src="publicUrl.item(drop.id)"
+            :fallback-src="publicUrl.itemDefault()"
             :alt="drop.name"
             class="img-thumbnail"
-            @error="e => e.target.src = publicUrl.itemDefault()"
-          >
+          />
         </RouterLink>
       </div>
     </div>
