@@ -7,7 +7,20 @@ export class BbbHidenStreetUrl
   }
 
   monster(name) {
-    return `${this.baseUrl}/monster/${name.toLowerCase().split(' ').join('-')}`
+    
+
+    return `${this.baseUrl}/monster/${this.#toUrlCompatible(name)}`
+  }
+
+  /**
+   * @param string str
+   * @returns {string}
+   */
+  #toUrlCompatible(str) {
+    return str.toLowerCase()
+      .replace(/\./g, '')
+      .split(' ')
+      .join('-')
   }
 
   search(keyword) {
