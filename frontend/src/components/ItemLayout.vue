@@ -96,7 +96,7 @@ onUpdated(() => {
         class="m-1 item-dropper align-self-end"
         data-bs-toggle="tooltip"
         data-bs-html="true"
-        :title="`Name: ${dropper.name}<br/>Chance: ${dropper.chance}`"
+        :title="`ID: ${dropper.id}<br/>Name: ${dropper.name}<br/>Chance: ${dropper.chance}`"
       >
         <RouterLink :to="{ name: 'monsters', params: { id: dropper.id } }" target="_blank">
           <FallbackableImage
