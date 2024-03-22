@@ -6,8 +6,6 @@ ARG JDK_VERSION="17-jdk-alpine"
 
 FROM eclipse-temurin:${JDK_VERSION} AS build
 
-# RUN apk add gcompat
-
 WORKDIR /app
 
 COPY . .
