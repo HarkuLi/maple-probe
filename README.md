@@ -51,17 +51,23 @@ server.
     [Item.wz and Mob.wz](https://github.com/P0nk/Cosmic-client/tree/main/cosmic-wz)
     using [Harepacker](https://github.com/lastbattle/Harepacker-resurrected).
 
-5.  Start Maprobe.
+5.  Build images.
+
+    ```bash
+    make build
+    ```
+
+6.  Start Maprobe.
 
     ```bash
     make up
     ```
 
-6.  Access Maprobe at [localhost:8080](localhost:8080).
+7.  Access Maprobe at [localhost:8080](http://localhost:8080).
     *   The listening port might not be `8080` if you have changed the
         `FRONTEND_PORT` setting in `.env` file.
 
-7.  You can stop Maprobe by
+8.  You can stop Maprobe by
 
     ```bash
     make down
