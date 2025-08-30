@@ -3,8 +3,23 @@
 Web-based GUI for interacting with [Cosmic][]/[HeavenMS][] MapleStory v83
 server.
 
+![demo](./assets/demo.gif)
+
 [Cosmic]: https://github.com/P0nk/Cosmic
 [HeavenMS]: https://github.com/ronancpl/HeavenMS
+
+## Features
+
+*   Item
+    *   Search by name or ID.
+    *   List droppers with dropping chances.
+    *   Provide a link to [Hidden Street](https://bbb.hidden-street.net/) for
+        details.
+*   Monster
+    *   Search by name or ID.
+    *   List drops with dropping chances.
+    *   Provide a link to [Hidden Street](https://bbb.hidden-street.net/) for
+        details.
 
 ## Prerequisite
 
@@ -12,7 +27,7 @@ server.
 2.  [Docker](https://www.docker.com)
 3.  [Docker Compose](https://docs.docker.com/compose/install)
 
-## Get Started
+## Getting Started
 
 1.  Run the database of Cosmic or HeavenMS.
 
