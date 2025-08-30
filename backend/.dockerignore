@@ -1,6 +1,9 @@
 .devcontainer
 .github
+.gradle
 .idea
 bin
 build
 Dockerfile
+.gitignore
+README.md
